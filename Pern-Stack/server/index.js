@@ -26,7 +26,6 @@ app.post("/highscores", async(req,res)=>{
 
 });
 //Get all high scores
-
 app.get("/highscores",async(req,res)=>{
     try{
         const allHighscores = await pool.query("SELECT * FROM highscores ORDER BY score DESC");
@@ -34,7 +33,22 @@ app.get("/highscores",async(req,res)=>{
     }catch(err){
         console.error(err.message);
     }
-})
+});
+
+//Get High scores with specific name
+app.get("/highscores/:name",async(req,res)=>{
+
+    try{
+        console.log(req.params);
+        const {name} = req.params;
+        const highscore = await pool.query("SELECT * FROM highscores where username = $1 ORDER BY score DESC",[name]);
+        res.json(highscore.rows);
+    } catch (err){
+        console.error(err.message);
+    } 
+
+});
+
 
 app.listen(5000, ()=>{
     console.log("server has started on port 5000");
