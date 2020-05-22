@@ -39,7 +39,7 @@ app.get("/highscores",async(req,res)=>{
 app.get("/highscores/:name",async(req,res)=>{
 
     try{
-        console.log(req.params);
+
         const {name} = req.params;
         const highscore = await pool.query("SELECT * FROM highscores where username = $1 ORDER BY score DESC",[name]);
         res.json(highscore.rows);
