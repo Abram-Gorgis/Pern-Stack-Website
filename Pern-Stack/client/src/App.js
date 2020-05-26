@@ -8,11 +8,11 @@ import Game from "./components/game"
 
 function App() {
 
+ 
   return(
     <Fragment>
       <div className="container"> 
       <Game/>
-      <InputHighScore type = {Game}/>
       </div>
      
     </Fragment>

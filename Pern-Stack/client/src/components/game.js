@@ -1,8 +1,9 @@
 import React, {Fragment, useState, Component} from "react";
+
+//components
 import Snake from "./Snake";
 import Food from "./food";
-
-
+import InputHighScore from "./InputHighScore"
    const getRandomCoordinates =() =>{
         let min = 1;
         let max = 98;
@@ -13,6 +14,8 @@ import Food from "./food";
     const initialState = {
     food: getRandomCoordinates(),
     speed: 200,
+    playing: false,
+    gameOver: false,
     direction: 'RIGHT',
     snakeDots: [
       [0,0],
@@ -21,14 +24,17 @@ import Food from "./food";
   }
 class game extends Component{
    
+    playing = false;
     state = initialState;
 
     componentDidMount() {
-      setInterval(this.moveSnake, this.state.speed);
+      setInterval(this.moveSnake,this.state.speed);
       document.onkeydown = this.onKeyDown;
+
     }
   
     componentDidUpdate() {
+      
       this.checkIfOutOfBorders();
       this.checkIfCollapsed();
       this.checkIfEat();
@@ -57,6 +63,8 @@ class game extends Component{
     }
   
     moveSnake = () => {
+      if(this.state.playing)
+      {
       let dots = [...this.state.snakeDots];
       let head = dots[dots.length - 1];
   
@@ -79,6 +87,7 @@ class game extends Component{
       this.setState({
         snakeDots: dots
       })
+    }
     }
   
     checkIfOutOfBorders() {
@@ -131,22 +140,48 @@ class game extends Component{
         snakeDots: newSnake
       })
     }
-  
+
+
     
     onGameOver() {
       alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
       this.setState(initialState)
+      var output = document.getElementById('score');
+        output.innerHTML = "Score: "+(0);
+    }
+
+    //binded to play button to set playing to true
+    startGame(){
+    this.setState({
+      playing:true
+    })
     }
   
     render() {
+    
+       //displays actualy game that user plays
+      if(this.state.playing){
       return (
         <Fragment>
-        <h1 className ="text-center mt-5" id="score">Score: 0</h1>
+        <h1 className ="text-center mt-5 " id="score">Score: 0</h1>
         <div className="game-area">
           <Snake snakeDots={this.state.snakeDots}/>
           <Food dot={this.state.food}/>
-        </div></Fragment>
+        </div>
+        <InputHighScore score ={this.state.snakeDots.length*100-100}/>
+        </Fragment>
       );
+      }
+      else//default 
+      {
+        return(
+        <Fragment>
+        <h1 className ="text-center mt-5" id="score">Welcome to my PERN stack project</h1>
+        <div className="game-area text-center">
+        <button className = "btn btn-success mt-5" onClick={this.startGame.bind(this)}>PLAY</button>   
+        </div>
+        </Fragment>);
+        }
     }
    
 }

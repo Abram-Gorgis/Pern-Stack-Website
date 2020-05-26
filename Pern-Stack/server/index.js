@@ -17,6 +17,7 @@ app.post("/highscores", async(req,res)=>{
 
        const {username} = req.body;
        const{score}= req.body;
+       console.log(req.body);
        const newHighscore = await pool.query("INSERT INTO highscores (username,score) VALUES($1,$2) RETURNING *",[username,score]);
 
        res.json(newHighscore.rows[0]);
