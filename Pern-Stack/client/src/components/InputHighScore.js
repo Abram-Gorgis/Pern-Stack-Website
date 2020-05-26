@@ -1,5 +1,4 @@
-import React, {Fragment, useState, Component} from "react";
-import Game from "./game";
+import React, {Fragment, useState} from "react";
  
 
 

@@ -14,7 +14,6 @@ import InputHighScore from "./InputHighScore"
     const initialState = {
     food: getRandomCoordinates(),
     speed: 200,
-    playing: false,
     gameOver: false,
     direction: 'RIGHT',
     snakeDots: [
@@ -24,10 +23,18 @@ import InputHighScore from "./InputHighScore"
   }
 class game extends Component{
    
-    playing = false;
+ 
+    props;
+
+    game(props)
+    {
+      this.props = props;
+    }
+
     state = initialState;
 
     componentDidMount() {
+
       setInterval(this.moveSnake,this.state.speed);
       document.onkeydown = this.onKeyDown;
 
@@ -63,8 +70,7 @@ class game extends Component{
     }
   
     moveSnake = () => {
-      if(this.state.playing)
-      {
+      
       let dots = [...this.state.snakeDots];
       let head = dots[dots.length - 1];
   
@@ -88,7 +94,6 @@ class game extends Component{
         snakeDots: dots
       })
     }
-    }
   
     checkIfOutOfBorders() {
       let head = this.state.snakeDots[this.state.snakeDots.length - 1];
@@ -110,7 +115,7 @@ class game extends Component{
     increaseSpeed() {
       if (this.state.speed > 20) {
         this.setState({
-          speed: this.state.speed-5
+          speed: this.state.speed-10
         })
       }
     clearInterval(this.interval);
@@ -139,28 +144,28 @@ class game extends Component{
       this.setState({
         snakeDots: newSnake
       })
+     
     }
 
 
     
     onGameOver() {
-      alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
-      this.setState(initialState)
+      /*this.setState(initialState)
       var output = document.getElementById('score');
         output.innerHTML = "Score: "+(0);
+        clearInterval(this.interval);
+        this.interval = setInterval(this.moveSnake, this.state.speed);*/
+    
+      this.props.reset();
     }
 
     //binded to play button to set playing to true
-    startGame(){
-    this.setState({
-      playing:true
-    })
-    }
+ 
   
     render() {
     
        //displays actualy game that user plays
-      if(this.state.playing){
+      
       return (
         <Fragment>
         <h1 className ="text-center mt-5 " id="score">Score: 0</h1>
@@ -171,18 +176,10 @@ class game extends Component{
         <InputHighScore score ={this.state.snakeDots.length*100-100}/>
         </Fragment>
       );
-      }
-      else//default 
-      {
-        return(
-        <Fragment>
-        <h1 className ="text-center mt-5" id="score">Welcome to my PERN stack project</h1>
-        <div className="game-area text-center">
-        <button className = "btn btn-success mt-5" onClick={this.startGame.bind(this)}>PLAY</button>   
-        </div>
-        </Fragment>);
+    
+
         }
-    }
+    
    
 }
 

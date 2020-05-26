@@ -1,22 +1,46 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Component} from 'react';
 import './App.css';
 
 //components
+import Game from "./components/game";
+import Menu from "./components/menuButtons";
 
-import InputHighScore from "./components/InputHighScore"
-import Game from "./components/game"
+const initialState = {
+  play:false
+}
+class App extends Component{
 
-function App() {
+  state = initialState;
 
- 
-  return(
+  resetState(){
+    this.setState(initialState);
+  }
+  startGame(){
+    this.setState({
+      play:true
+    })
+    }
+    
+  render()
+  {
+
+    
+    var game = this.state.play ? <Game reset={this.resetState.bind(this)}/> : null;
+    var buttons = !this.state.play ?  <Menu  start={this.startGame.bind(this)}/>: null;
+
+  
+    return(
     <Fragment>
       <div className="container"> 
-      <Game/>
+      {game}
+      {buttons}
       </div>
-     
     </Fragment>
   );
+ 
+  
+  }
+  
 }
 
 export default App;
