@@ -1,4 +1,4 @@
-import React, {Fragment, useState, Component} from "react";
+import React, {Fragment, Component} from "react";
 
 //components
 import Snake from "./Snake";
@@ -41,10 +41,12 @@ class game extends Component{
     }
   
     componentDidUpdate() {
-      
+      if(!this.state.gameOver)
+      {
       this.checkIfOutOfBorders();
       this.checkIfCollapsed();
       this.checkIfEat();
+      }
     }
   
     onKeyDown = (e) => {
@@ -66,11 +68,14 @@ class game extends Component{
             if(this.state.direction!=='LEFT')
           this.setState({direction: 'RIGHT'});
           break;
+        default:
       }
     }
   
     moveSnake = () => {
       
+      if(this.state.gameOver===false)
+      {
       let dots = [...this.state.snakeDots];
       let head = dots[dots.length - 1];
   
@@ -87,12 +92,14 @@ class game extends Component{
         case 'UP':
           head = [head[0], head[1] - 2];
           break;
+        default:
       }
       dots.push(head);
       dots.shift();
       this.setState({
         snakeDots: dots
       })
+    }
     }
   
     checkIfOutOfBorders() {
@@ -132,7 +139,7 @@ class game extends Component{
           food: getRandomCoordinates()
         })
         var output = document.getElementById('score');
-        output.innerHTML = "Score: "+(this.state.snakeDots.length*100);
+        output.innerHTML = "Score: "+(this.state.snakeDots.length*100-100);
         this.enlargeSnake();
         this.increaseSpeed();
       }
@@ -150,15 +157,18 @@ class game extends Component{
 
     
     onGameOver() {
-      /*this.setState(initialState)
       var output = document.getElementById('score');
         output.innerHTML = "Score: "+(0);
         clearInterval(this.interval);
-        this.interval = setInterval(this.moveSnake, this.state.speed);*/
+        this.interval = setInterval(this.moveSnake, this.state.speed);
     
-      this.props.reset();
+      this.setState({
+        gameOver:true
+      })
+      
     }
 
+   
     //binded to play button to set playing to true
  
   
@@ -166,6 +176,15 @@ class game extends Component{
     
        //displays actualy game that user plays
       
+      if(this.state.gameOver)
+      {
+        return(<Fragment>
+          <div className="game-area">
+            <h1 className ="text-center mt-5 mb-5">Congrats on getting a score of {this.state.snakeDots.length*100-200}</h1>
+             <InputHighScore score ={this.state.snakeDots.length*100-200} reset = {this.props.reset}/>
+          </div>
+          </Fragment>)
+      }
       return (
         <Fragment>
         <h1 className ="text-center mt-5 " id="score">Score: 0</h1>
@@ -173,7 +192,7 @@ class game extends Component{
           <Snake snakeDots={this.state.snakeDots}/>
           <Food dot={this.state.food}/>
         </div>
-        <InputHighScore score ={this.state.snakeDots.length*100-100}/>
+       
         </Fragment>
       );
     

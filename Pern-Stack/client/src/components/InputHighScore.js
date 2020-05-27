@@ -9,6 +9,12 @@ const InputHighScore = (props) =>{
     const onSubmitForm = async(e) =>{
         e.preventDefault();
         try{
+            if(username===""||props.score===0)
+            {
+                alert("Username can not be blank and score can not be 0");
+                return;
+            }
+
             const score = props.score;
             const body = {username,score}
            
@@ -17,22 +23,30 @@ const InputHighScore = (props) =>{
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify(body)
         });
+        console.log(response);
+        returnMainMenu();
         }catch(err){
         
             console.error(err.message);
         }
     }
   
+    const returnMainMenu = ()=>{
 
-
+        props.reset();
+    }
    //Highscores
     return (
     <Fragment>
-        <h1 className ="text-center mt-5">Enter Username</h1>
-        <form className="d-flex" onSubmit={onSubmitForm}>
-            <input type = "tsxt" className="form-control" value = {username} onChange={e=>setUsername(e.target.value)}/>
-            <button className = "btn btn-success ml-3">Submit</button>    
+        <h1 className ="text-center mt-5">Submit Highscores</h1>
+        <form className="d-flex mr-2" onSubmit={onSubmitForm}>
+            <input type = "tsxt" className="form-control" placeholder="Enter Username" value = {username} onChange={e=>setUsername(e.target.value)}/>
+            <button className = "btn btn-secondary ml-3 ">Submit</button> 
         </form>
+        <div className = "text-center mt-3">
+        <button className = "btn btn-primary text-center" onClick={returnMainMenu}  >Main Menu</button> 
+         </div>
+        
     </Fragment>)
 };
 

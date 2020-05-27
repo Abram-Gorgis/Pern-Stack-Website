@@ -29,7 +29,7 @@ app.post("/highscores", async(req,res)=>{
 //Get all high scores
 app.get("/highscores",async(req,res)=>{
     try{
-        const allHighscores = await pool.query("SELECT * FROM highscores ORDER BY score DESC");
+        const allHighscores = await pool.query("SELECT Rank() OVER(ORDER by score desc) rank,* FROM highscores ORDER BY score DESC");
         res.json(allHighscores.rows);
     }catch(err){
         console.error(err.message);
@@ -42,7 +42,8 @@ app.get("/highscores/:name",async(req,res)=>{
     try{
 
         const {name} = req.params;
-        const highscore = await pool.query("SELECT * FROM highscores where username = $1 ORDER BY score DESC",[name]);
+        //this will return the original rankins from the data base then select the searched username from those rankings
+        const highscore = await pool.query("WITH highscore AS (SELECT RANK() OVER (ORDER BY score DESC) rank, * FROM highscores) SELECT * FROM highscore WHERE LOWER(username)=LOWER($1)",[name]);
         res.json(highscore.rows);
     } catch (err){
         console.error(err.message);
