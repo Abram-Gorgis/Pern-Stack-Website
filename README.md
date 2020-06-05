@@ -27,6 +27,6 @@ Project is created with:
 ##### Game Over:
 <img src= "images/Capture3.PNG" width="500">
 
-* Entering submiting a blank name or a score of 0 will alert the user
+* Submitting a blank name or a score of 0 will alert the user
 <img src= "images/Capture2.PNG" width="500">
 
