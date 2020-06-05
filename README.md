@@ -17,5 +17,5 @@ Project is created with:
 * CSS
 
 ## Images
-![](images/Capture.png)
+![](images/Capture.PNG)
 
