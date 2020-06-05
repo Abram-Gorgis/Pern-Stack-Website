@@ -18,9 +18,15 @@ Project is created with:
 
 ## Images
 ##### Home Page:
-
 <img src= "images/Capture.PNG" width="500">
 
 ##### Gameplay:
-*Controls are arrow keys collecting red squares will enlarge snake and increase game spead
+* Controls are arrow keys collecting red squares will enlarge snake and increase game spead
 <img src= "images/Capture7.PNG" width="500">
+
+##### Game Over:
+<img src= "images/Capture3.PNG" width="500">
+
+* Entering submiting a blank name or a score of 0 will alert the user
+<img src= "images/Capture2.PNG" width="500">
+
