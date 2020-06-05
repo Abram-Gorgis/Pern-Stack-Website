@@ -18,6 +18,7 @@ Project is created with:
 
 ## Images
 Home Page:
+
 <img src= "images/Capture.PNG" width="500">
 
 Gameplay:
