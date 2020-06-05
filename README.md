@@ -30,3 +30,11 @@ Project is created with:
 * Submitting a blank name or a score of 0 will alert the user
 <img src= "images/Capture2.PNG" width="500">
 
+##### Highscores:
+* Highscores will initially display top 20 players
+<img src= "images/Capture4.PNG" width="500">
+
+* Searching users conserves their ranking
+<img src= "images/Capture5.PNG" width="500">
+<img src= "images/Capture6.PNG" width="500">
+
