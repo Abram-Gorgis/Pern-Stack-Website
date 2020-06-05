@@ -17,5 +17,9 @@ Project is created with:
 * CSS
 
 ## Images
+Home Page:
 <img src= "images/Capture.PNG" width="500">
 
+Gameplay:
+Controls are arrow keys collecting red squares will enlarge snake and increase game spead
+<img src= "images/Capture7.PNG" width="500">
