@@ -21,6 +21,6 @@ Home Page:
 
 <img src= "images/Capture.PNG" width="500">
 
-Gameplay:
+Gameplay:\n
 Controls are arrow keys collecting red squares will enlarge snake and increase game spead
 <img src= "images/Capture7.PNG" width="500">
