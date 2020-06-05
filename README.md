@@ -17,5 +17,5 @@ Project is created with:
 * CSS
 
 ## Images
-<img src= "images/Capture.PNG" width="100">
+<img src= "images/Capture.PNG" width="500">
 
