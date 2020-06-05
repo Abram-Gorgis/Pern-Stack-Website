@@ -1,6 +1,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Images](#images)
 
 ## General info
 This project was created to practice developing a PERN stack application
@@ -14,3 +15,6 @@ Project is created with:
 * Node.js
 * HTML
 * CSS
+
+## Images
+
