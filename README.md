@@ -21,7 +21,7 @@ Project is created with:
 <img src= "images/Capture.PNG" width="500">
 
 ##### Gameplay:
-* Controls are arrow keys collecting red squares will enlarge snake and increase game spead
+* Controls are arrow keys collecting red squares will enlarge snake and increase game speed
 <img src= "images/Capture7.PNG" width="500">
 
 ##### Game Over:
